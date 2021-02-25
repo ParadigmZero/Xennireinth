@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D myRB;
+    private Animator myAnim;
+
+
     [SerializeField]
     private float speed;
 
@@ -12,13 +15,15 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
+        myAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         myRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * speed * Time.deltaTime;
-
-        // Debug.Log(myRB.velocity;
+        
+        myAnim.SetFloat("MoveX", myRB.velocity.x);
+        myAnim.SetFloat("MoveY", myRB.velocity.y);
     }
 }
